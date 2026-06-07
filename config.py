@@ -28,10 +28,16 @@ TOP_K_RERANKED = 4      # keep top 4 after reranking to pass to LLM
 # Evaluation
 EVAL_SCORE_THRESHOLD = 0.7  # retry loop triggers below this score
 
-# LangSmith
+# LangSmith Observability
+import os
 LANGCHAIN_TRACING_V2 = os.getenv("LANGCHAIN_TRACING_V2", "false")
 LANGCHAIN_API_KEY = os.getenv("LANGCHAIN_API_KEY")
 LANGCHAIN_PROJECT = os.getenv("LANGCHAIN_PROJECT", "finsight")
+
+# This activates tracing — must be set before any LangChain imports
+os.environ["LANGCHAIN_TRACING_V2"] = LANGCHAIN_TRACING_V2
+os.environ["LANGCHAIN_API_KEY"] = LANGCHAIN_API_KEY or ""
+os.environ["LANGCHAIN_PROJECT"] = LANGCHAIN_PROJECT
 
 # Tavily
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
